@@ -44,6 +44,8 @@ c4 connect --help
 c4 update --help
 ```
 
+For a complete command and flag listing, see [c4 Command and Flag Reference](c4_command_reference.md).
+
 ## Common Commands Overview
 
 | Command | Purpose | Example |
@@ -119,6 +121,10 @@ c4 rm PLAY_ID
 c4 update cluster -p PLAY_ID -t @exasol-VERSION
 ```
 
+## Offline Deployment Note
+
+C4 can deploy Exasol without internet connection when required Exasol artifacts are already available locally in the user home directory. In that case, c4 uses local files instead of fetching from remote sources.
+
 ## Related Documentation
 
 - [c4 Overview](c4_overview.md)
@@ -128,3 +134,4 @@ c4 update cluster -p PLAY_ID -t @exasol-VERSION
 - [c4 Monitoring Deployments](c4_monitoring.md)
 - [c4 Connecting to Deployments](c4_connecting.md)
 - [c4 Managing Nodes](c4_managing_nodes.md)
+- [c4 Command and Flag Reference](c4_command_reference.md)

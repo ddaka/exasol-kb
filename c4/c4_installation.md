@@ -83,6 +83,48 @@ sudo mv c4 /usr/local/bin/
 c4 --help
 ```
 
+## Installation Host Validation (Correct diag usage)
+
+For installation-host validation, use host-specific diagnostics:
+
+```bash
+c4 diag host -i config
+```
+
+Do not use plain `c4 diag` as the primary installation-host validation because it includes build/developer checks not specific to runtime host readiness.
+
+### Example: `c4 diag host -i config` with disk issue
+
+- FAILED `check_disks`: data disk `/dev/vda` is not readable/writable as required for user `exasol`
+- OK `check_external_dependencies`
+- OK `check_internal_rootless_dependencies`
+- OK `check_required_params`
+- OK `check_time_sync`
+- OK `check_unprivileged_userns_clone`
+
+Example interpretation: at least one host diag check failed, so disk access must be fixed first.
+
+## Offline Installation Support
+
+C4 can deploy Exasol without internet access if required Exasol artifacts are already present locally.
+
+In this environment, required installation files should be available in the user home directory. If they are present, c4 uses local artifacts instead of downloading them.
+
+Example required artifact in `$HOME`:
+
+`exasol-2025.2.0.tar.gz`
+
+The artifact version should match the Exasol version you install.
+Example: for Exasol `2025.2.0`, use `exasol-2025.2.0.tar.gz`.
+
+Recommended checks before offline deployment:
+
+```bash
+ls -lah "$HOME"
+ls -lah "$HOME/exasol-2025.2.0.tar.gz"
+c4 diag host -i config
+```
+
 ## Next Steps
 
 After installation:
@@ -113,3 +155,4 @@ export PATH=$PATH:/path/to/c4/directory
 - [c4 Overview](c4_overview.md)
 - [c4 Configuration](c4_configuration.md)
 - [c4 Basic Usage](c4_basic_usage.md)
+- [c4 Command and Flag Reference](c4_command_reference.md)

@@ -86,6 +86,27 @@ Customize the information shown with `c4 ps` options:
 c4 ps --help
 ```
 
+## Host Diagnostics for Runtime Readiness
+
+Use host-scoped diagnostics for installation/runtime checks:
+
+```bash
+c4 diag host -i config
+```
+
+Do not use plain `c4 diag` as the primary installation-host validation because it includes broader build/developer checks.
+
+### Example: `c4 diag host -i config` with disk issue
+
+- FAILED `check_disks`: data disk `/dev/vda` is not readable/writable as required for user `exasol`
+- OK `check_external_dependencies`
+- OK `check_internal_rootless_dependencies`
+- OK `check_required_params`
+- OK `check_time_sync`
+- OK `check_unprivileged_userns_clone`
+
+Example interpretation: at least one host diag check failed, so disk access must be fixed first.
+
 ## Monitoring Best Practices
 
 **Monitor deployments regularly**
@@ -138,3 +159,4 @@ CCC_USER_PS_REMOTE_TIMEOUT=10000 c4 ps
 - [c4 Connecting to Deployments](c4_connecting.md)
 - [c4 Managing Nodes](c4_managing_nodes.md)
 - [c4 Troubleshooting](c4_troubleshooting.md)
+- [c4 Command and Flag Reference](c4_command_reference.md)
